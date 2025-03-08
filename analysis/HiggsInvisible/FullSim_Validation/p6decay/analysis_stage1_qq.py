@@ -4,7 +4,7 @@
 processList = {
     #'p8_ee_ZZ_ecm240':{},#Run the full statistics in one output file named <outputDir>/p8_ee_ZZ_ecm240.root
     #'p8_ee_WW_ecm240':{'fraction':0.5, 'chunks':2}, #Run 50% of the statistics in two files named <outputDir>/p8_ee_WW_ecm240/chunk<N>.root
-    'wzp6_ee_qqH_ecm240':{'fraction':1., 'output':'wzp6_ee_qqH_ecm240'} #Run 100% of the statistics in one file named <outputDir>/p8_ee_ZH_ecm240_out.root (example on how to change the output name)
+    'wzp6_ee_WW_lvqq_ecm240_p6decay_test':{'fraction':1.} #Run 100% of the statistics in one file named <outputDir>/p8_ee_ZH_ecm240_out.root (example on how to change the output name)
     #'wzp6_ee_qqH_ecm240':{'chunks':20, 'output':'wzp6_ee_qqH_ecm240'} #Run 100% of the statistics in one file named <outputDir>/p8_ee_ZH_ecm240_out.root (example on how to change the output name)
 
 }
@@ -12,7 +12,7 @@ processList = {
 prodTag     = "FCCee/winter2023/IDEA/"
 
 #Optional: output directory, default is local running directory
-outputDir   = "outputs_HInvjj/Validation/"
+outputDir   = "outputs_HInvjj/Validation_p6decay/"
 
 #Optional: analysisName, default is ""
 #analysisName = "My Analysis"
@@ -144,6 +144,7 @@ class RDFanalysis():
             .Define("electrons_p",   "ReconstructedParticle::get_p(electrons)")
             .Define("electrons_e",   "ReconstructedParticle::get_e(electrons)") 
             .Define("electrons_tlv", "ReconstructedParticle::get_tlv(electrons)")
+
    
             .Define('muon', 'ReconstructedParticle::sel_absType(13)(TightSelectedPandoraPFOs)')
             .Define('muons','HiggsTools::sort_greater_p(muon)')
@@ -204,9 +205,11 @@ class RDFanalysis():
             .Define("daughter_Wm_1_pid", "daughter_Wm.size()>1 ? daughter_Wm[1] : -1000")
 
             .Define("Muon_MC", "HiggsTools::gen_sel_pdgIDInt(13,true)(MCParticles)")
-            .Define("Muon_MC_Parent", "get_lepton_origin(Muon_MC, MCParticles, parents)")
+            .Define("Muon_MC_Parent", "MCParticle::get_parentid(Muon_MC, MCParticles, parents)")
+            .Define("Muon_MC_no", "Muon_MC.size()")
             .Define("Electron_MC", "HiggsTools::gen_sel_pdgIDInt(11,true)(MCParticles)")
-            .Define("Electron_MC_Parent", "get_lepton_origin(Electron_MC, MCParticles, parents)")
+            .Define("Electron_MC_Parent", "MCParticle::get_parentid(Electron_MC, MCParticles, parents)")
+            .Define("Electron_MC_no", "Electron_MC.size()")
 
             .Alias("particles", "jets")
 
@@ -273,6 +276,8 @@ class RDFanalysis():
             "daughter_Wm_1_pid",
             #"W_MC_daughters",
             "Muon_MC_Parent",
+            "Muon_MC_no",
             "Electron_MC_Parent",
+            "Electron_MC_no"
         ]
         return branchList

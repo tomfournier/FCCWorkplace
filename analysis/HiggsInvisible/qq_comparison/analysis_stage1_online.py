@@ -2,8 +2,9 @@
 
 processList = {
     #signal
-    #"wzp6_ee_mumuH_ecm240":{'chunks':10},
-    #"wzp6_ee_mumuH_HZZ_ecm240":{'chunks':10},
+    #"wzp6_ee_qqH_ecm240":{'fraction':0.1}, 
+    "wzp6_ee_qqH_ecm240":{'chunks':10},
+    "wzp6_ee_qqH_HZZ_ecm240":{'chunks':10},
     ##background: 
     "p8_ee_WW_ecm240":{'chunks':80},
     "p8_ee_ZZ_ecm240":{'chunks':20},
@@ -20,15 +21,15 @@ processList = {
 prodTag     = "FCCee/winter2023/IDEA/"
 
 #from userConfig import loc
-#outputDir="/eos/experiment/fcc/ee/analyses_storage/Higgs_and_TOP/HiggsInvisible/lia/firstlook/test"
-outputDirEos= "/eos/experiment/fcc/ee/analyses_storage/Higgs_and_TOP/HiggsInvisible/lia/firstlook/stage1"
+outputDir="/eos/experiment/fcc/ee/analyses_storage/Higgs_and_TOP/HiggsInvisible/lia/qq_comparison/stage1"
+#outputDirEos= "/eos/experiment/fcc/ee/analyses_storage/Higgs_and_TOP/HiggsInvisible/lia/qq_comparison/stage1"
 eosType = "eosuser"
 #Optional: ncpus, default is 4
 nCPUS       = 4
 
 #Optional running on HTCondor, default is False
-runBatch    = True
-#runBatch    = False
+#runBatch    = True
+runBatch    = False
 #Optional batch queue name when running on HTCondor, default is workday
 batchQueue = "longlunch"
 
@@ -79,21 +80,25 @@ def analysis_sequence(df):
             #############################################
             ## Define the collections of jets          ##
             #############################################
-            #.Define("jets", "ReconstructedParticle::sel_p(15)(Jet)")
-            #.Define("jets_p", "FCCAnalyses::ReconstructedParticle::get_p(jets)")
-            #.Define("jets_theta", "FCCAnalyses::ReconstructedParticle::get_theta(jets)")
-            #.Define("jets_phi", "FCCAnalyses::ReconstructedParticle::get_phi(jets)")
-            #.Define("jets_no", "FCCAnalyses::ReconstructedParticle::get_n(jets)")
+            .Define("jets", "ReconstructedParticle::sel_p(15)(Jet)")
+            .Define("jets_p", "FCCAnalyses::ReconstructedParticle::get_p(jets)")
+            .Define("jets_theta", "FCCAnalyses::ReconstructedParticle::get_theta(jets)")
+            .Define("jets_phi", "FCCAnalyses::ReconstructedParticle::get_phi(jets)")
+            .Define("jets_no", "FCCAnalyses::ReconstructedParticle::get_n(jets)")
 
             #############################################
             ## Define which object to use              ##
             #############################################
-            .Alias("leps", "muons")
+            .Alias("leps_all", "muons")
+            .Define("leps", "FCCAnalyses::ReconstructedParticle::sel_p(10)(leps_all)")
             .Define("leps_iso", "HiggsTools::coneIsolation(0.01, 0.5)(leps, ReconstructedParticles)")
+            .Define("leps_sel_iso", "HiggsTools::sel_isol(0.25)(leps, leps_iso)")
+
             #############################################
             ## Z builder                               ##
             #############################################
-            .Define("Z", "HiggsTools::resonanceZBuilder2(91, true)(leps, MCRecoAssociations0, MCRecoAssociations1, ReconstructedParticles, Particle)")  
+            #.Define("Z", "HiggsTools::resonanceZBuilder2(91, true)(jets, MCRecoAssociations0, MCRecoAssociations1, ReconstructedParticles, Particle)")  
+            .Define("Z", "ReconstructedParticle::resonanceBuilder(91)(jets)")
             .Define("Z_p", "FCCAnalyses::ReconstructedParticle::get_p(Z)")
             .Define("Z_m", "FCCAnalyses::ReconstructedParticle::get_mass(Z)")
             .Define("Z_theta", "FCCAnalyses::ReconstructedParticle::get_theta(Z)")
@@ -120,6 +125,8 @@ def analysis_sequence(df):
             .Define("missing_px", "FCCAnalyses::ReconstructedParticle::get_px(missing)")
             .Define("missing_py", "FCCAnalyses::ReconstructedParticle::get_py(missing)")
             .Define("missing_pz", "FCCAnalyses::ReconstructedParticle::get_pz(missing)")
+            .Define("missing_pt", "FCCAnalyses::ReconstructedParticle::get_pt(missing)")
+            .Define("missing_costheta", "HiggsTools::get_cosTheta(missing)") 
 
             #############################################
             # Visible information
@@ -133,6 +140,8 @@ def analysis_sequence(df):
             .Define("visible_px", "FCCAnalyses::ReconstructedParticle::get_px(visible)")
             .Define("visible_py", "FCCAnalyses::ReconstructedParticle::get_py(visible)")
             .Define("visible_pz", "FCCAnalyses::ReconstructedParticle::get_pz(visible)") 
+            .Define("visible_pt", "FCCAnalyses::ReconstructedParticle::get_pt(visible)")
+            .Define("visible_costheta", "HiggsTools::get_cosTheta(visible)")
 
             #First imput to Z, second to Higgs
             .Define("ZHChi2", "HiggsTools::ZHChi2(visible_mass[0], missing_mass[0])")
@@ -183,6 +192,15 @@ class RDFanalysis():
             "electrons_phi",
             "electrons_no",
 
+            #jets
+            "jets_p",
+            "jets_theta",
+            "jets_phi",
+            "jets_no",
+
+            #lepton
+            "leps_iso",
+
             #Z
             "Z_p",
             "Z_m",
@@ -204,6 +222,8 @@ class RDFanalysis():
             "missing_px",
             "missing_py",
             "missing_pz",
+            "missing_pt",
+            "missing_costheta",
 
             #visible
             "visible_mass",
@@ -214,9 +234,9 @@ class RDFanalysis():
             "visible_px",
             "visible_py",
             "visible_pz",
+            "visible_pt",
+            "visible_costheta",
 
-            "ZHChi2",
-
-            "leps_iso"
+            "ZHChi2"
         ]
         return branchList

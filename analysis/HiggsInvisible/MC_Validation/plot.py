@@ -15,7 +15,7 @@ processList = [
 process = "wzp6_ee_mumuH_HZZ4nu_ecm240"
 path = "/eos/experiment/fcc/ee/analyses_storage/Higgs_and_TOP/HiggsInvisible/lia/MC_Validation/final/"
 
-selections = ["NoSel", "sel1", "sel2", "sel3", "sel4", "sel5"]
+selections = ["NoSel"]#, "sel1", "sel2", "sel3", "sel4", "sel5"]
 
 # List of histogram names
 histogram_names = [
@@ -60,41 +60,7 @@ histogram_names = [
                     "electrons_phi",
                     "electrons_no",
 
-                    #Z
-                    "Z_p",
-                    "Z_m",
-                    "Z_theta",
-                    "Z_phi",
-
-                    #recoil
-                    "Z_recoil_m",
-                    "Z_recoil_p",
-                    "Z_recoil_theta",
-                    "Z_recoil_phi",
-
-                    #missing
-                    "missing_mass",
-                    "missing_e",
-                    "missing_p",
-                    "missing_theta",
-                    "missing_phi",
-                    "missing_px",
-                    "missing_py",
-                    "missing_pz",
-
-                    #visible
-                    "visible_mass",
-                    "visible_e",
-                    "visible_p",
-                    "visible_theta",
-                    "visible_phi",
-                    "visible_px",
-                    "visible_py",
-                    "visible_pz",
-
-                    "ZHChi2",
-
-                    "leps_iso" 
+                    
                 ]  # Replace with your histogram names
 
 # Define the source and destination paths

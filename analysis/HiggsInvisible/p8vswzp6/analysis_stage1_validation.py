@@ -5,10 +5,9 @@ import os
 os.environ["FCCDICTSDIR"] = "/eos/experiment/fcc/ee/analyses_storage/Higgs_and_TOP/HiggsInvisible/lia/FCCDicts/"
 processList = {
     #signal
-    #"wzp6_ee_mumuH_HZZ4nu_ecm240":{'chunks':10},
-    #"wzp6_ee_nunuH_HZZ_mumununu_ecm240":{"chunks":10},
-    #"wzp6_ee_nunuH_HWW_munumunu_ecm240":{"chunks":10} 
-    "wzp6_ee_WW_lvqq_ecm240_p6decay_test":{"chunks":1},
+    "wzp6_ee_mumuH_HZZ4nu_ecm240":{'chunks':10},
+    "wzp6_ee_nunuH_HZZ_mumununu_ecm240":{"chunks":10},
+    "wzp6_ee_nunuH_HWW_munumunu_ecm240":{"chunks":10} 
     }
 #Mandatory: Production tag when running over EDM4Hep centrally produced events, this points to the yaml files for getting sample statistics
 #prodTag     = "/eos/experiment/fcc/ee/analyses_storage/Higgs_and_TOP/HiggsInvisible/lia/FCCDicts/"
@@ -105,8 +104,6 @@ def analysis_sequence(df):
             .Define("daughter_Wm_1_pid", "daughter_Wm.size()>1 ? daughter_Wm[1] : -1000")
             .Define("daughter_Wm_2_pid", "daughter_Wm.size()>2 ? daughter_Wm[2] : -1000")
             .Define("daughter_Wm_3_pid", "daughter_Wm.size()>3 ? daughter_Wm[3] : -1000")
-
-            .Define("Wp_MC", "HiggsTools::gen_sel_pdgIDInt(24,false)(Particle)")
 
             ####
             .Define("muon_status2",  "MCParticle::sel_genStatus(2) ( Particle )") 

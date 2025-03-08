@@ -4,7 +4,7 @@
 processList = {
     #'p8_ee_ZZ_ecm240':{},#Run the full statistics in one output file named <outputDir>/p8_ee_ZZ_ecm240.root
     #'p8_ee_WW_ecm240':{'fraction':0.5, 'chunks':2}, #Run 50% of the statistics in two files named <outputDir>/p8_ee_WW_ecm240/chunk<N>.root
-    'wzp6_ee_qqH_ecm240':{'fraction':1., 'output':'wzp6_ee_qqH_ecm240'} #Run 100% of the statistics in one file named <outputDir>/p8_ee_ZH_ecm240_out.root (example on how to change the output name)
+    'wzp6_ee_WW_munumunu_ecm240_p6decay':{'fraction':1.} #Run 100% of the statistics in one file named <outputDir>/p8_ee_ZH_ecm240_out.root (example on how to change the output name)
     #'wzp6_ee_qqH_ecm240':{'chunks':20, 'output':'wzp6_ee_qqH_ecm240'} #Run 100% of the statistics in one file named <outputDir>/p8_ee_ZH_ecm240_out.root (example on how to change the output name)
 
 }
@@ -12,7 +12,7 @@ processList = {
 prodTag     = "FCCee/winter2023/IDEA/"
 
 #Optional: output directory, default is local running directory
-outputDir   = "outputs_HInvjj/Validation/"
+outputDir   = "outputs_HInvjj/Validation_p6decay/"
 
 #Optional: analysisName, default is ""
 #analysisName = "My Analysis"
@@ -144,6 +144,7 @@ class RDFanalysis():
             .Define("electrons_p",   "ReconstructedParticle::get_p(electrons)")
             .Define("electrons_e",   "ReconstructedParticle::get_e(electrons)") 
             .Define("electrons_tlv", "ReconstructedParticle::get_tlv(electrons)")
+
    
             .Define('muon', 'ReconstructedParticle::sel_absType(13)(TightSelectedPandoraPFOs)')
             .Define('muons','HiggsTools::sort_greater_p(muon)')
@@ -189,26 +190,28 @@ class RDFanalysis():
             #.Define("W_MC_daughters", "MCParticle::list_of_stable_particles_from_decay(W_MC, MCParticles, Particle1)")
 
             
-            .Define("Wp_MC", "HiggsTools::gen_sel_pdgIDInt(24,false)(MCParticles)")
+            .Define("Wp_MC", "HiggsTools::gen_sel_pdgIDInt(24,false)(status2)")
             .Define("Wp_MC_no", "Wp_MC.size()")
-            .Define("daughter_Wp", "HiggsTools::gen_decay_list(Wp_MC, MCParticles, daughters)")
+            .Define("daughter_Wp", "HiggsTools::gen_decay_list(Wp_MC, status2, daughters)")
             .Define("daughter_Wp_no", "daughter_Wp.size()")
             .Define("daughter_Wp_0_pid", "daughter_Wp.size()>0 ? daughter_Wp[0] : -1000")
             .Define("daughter_Wp_1_pid", "daughter_Wp.size()>1 ? daughter_Wp[1] : -1000")
 
-            .Define("Wm_MC", "HiggsTools::gen_sel_pdgIDInt(-24,false)(MCParticles)")
+            .Define("Wm_MC", "HiggsTools::gen_sel_pdgIDInt(-24,false)(status2)")
             .Define("Wm_MC_no", "Wm_MC.size()")
-            .Define("daughter_Wm", "HiggsTools::gen_decay_list(Wm_MC, MCParticles, daughters)")
+            .Define("daughter_Wm", "HiggsTools::gen_decay_list(Wm_MC, status2, daughters)")
             .Define("daughter_Wm_no", "daughter_Wm.size()")
             .Define("daughter_Wm_0_pid", "daughter_Wm.size()>0 ? daughter_Wm[0] : -1000")
             .Define("daughter_Wm_1_pid", "daughter_Wm.size()>1 ? daughter_Wm[1] : -1000")
 
             .Define("Muon_MC", "HiggsTools::gen_sel_pdgIDInt(13,true)(MCParticles)")
-            .Define("Muon_MC_Parent", "get_lepton_origin(Muon_MC, MCParticles, parents)")
+            .Define("Muon_MC_Parent", "MCParticle::get_parentid(Muon_MC, MCParticles, parents)")
+            .Define("Muon_MC_no", "Muon_MC.size()")
             .Define("Electron_MC", "HiggsTools::gen_sel_pdgIDInt(11,true)(MCParticles)")
-            .Define("Electron_MC_Parent", "get_lepton_origin(Electron_MC, MCParticles, parents)")
+            .Define("Electron_MC_Parent", "MCParticle::get_parentid(Electron_MC, MCParticles, parents)")
+            .Define("Electron_MC_no", "Electron_MC.size()")
 
-            .Alias("particles", "jets")
+            .Alias("particles", "muons")
 
             .Define("ZCandidate",    "ReconstructedParticle::resonanceBuilder(91)(particles)")
             # Z boson pt
@@ -273,6 +276,8 @@ class RDFanalysis():
             "daughter_Wm_1_pid",
             #"W_MC_daughters",
             "Muon_MC_Parent",
+            "Muon_MC_no",
             "Electron_MC_Parent",
+            "Electron_MC_no"
         ]
         return branchList

@@ -90,10 +90,10 @@ def plot_root_histograms(root_files, input_dir, output_dir):
 
 if __name__ == "__main__":
     input_dir = "outputs_HInvjj/Validation_p6decay_Final"
-    output_dir = "/eos/user/l/lia/www/FCC/HiggsInv/FullSim_Validation_p6decay"
+    output_dir = "/eos/user/l/lia/www/FCC/HiggsInv/FullSim_Validation_test"
     root_files = [
-        "output_ee_WW_enuenu_ecm240_p6decay_sel0_NoCuts_histo.root",
-        "output_ee_WW_munumunu_ecm240_p6decay_sel0_NoCuts_histo.root",
-        "output_ee_WW_lvqq_ecm240_p6decay_sel0_NoCuts_histo.root"
+        "output_ee_WW_enuenu_parent_sel0_NoCuts_histo.root",
+        "output_ee_WW_munumunu_parent_sel0_NoCuts_histo.root",
+        "output_ee_WW_lvqq_parent_sel0_NoCuts_histo.root"
     ]
     plot_root_histograms(root_files, input_dir, output_dir)
