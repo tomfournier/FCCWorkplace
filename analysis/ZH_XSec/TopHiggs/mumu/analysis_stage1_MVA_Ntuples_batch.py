@@ -1,14 +1,17 @@
 #Mandatory: List of processes
 processList = {
-   # 'wzp6_ee_mumuH_ecm365':{'chunks':10},
-   # 'p8_ee_tt_ecm365':{'chunks':20},
-   # 'p8_ee_WW_ecm365':{'chunks':50},
-   # #'wzp6_egamma_eZ_Zmumu_ecm365':{'chunks':10},
-   # 'wzp6_gammae_eZ_Zmumu_ecm365':{'chunks':10},
-   # 'wzp6_ee_mumu_ecm365':{'chunks':10},
-   # 'p8_ee_ZZ_ecm365':{'chunks':50},
-   # "wzp6_gaga_mumu_60_ecm365":{'chunks':10},
-    'wzp6_ee_nunuH_ecm365':{'chunks':10}
+    #'wzp6_ee_mumuH_ecm365':{'fraction':0.2},
+   #'wzp6_ee_mumuH_ecm365':{'chunks':10},
+   #'p8_ee_tt_ecm365':{'chunks':20},
+   #'p8_ee_WW_ecm365':{'chunks':50},
+   #'wzp6_egamma_eZ_Zmumu_ecm365':{'chunks':10},
+   #'wzp6_gammae_eZ_Zmumu_ecm365':{'chunks':10},
+   #'wzp6_ee_mumu_ecm365':{'chunks':10},
+   #'wzp6_ee_tautau_ecm365':{'chunks':10},
+   #'p8_ee_ZZ_ecm365':{'chunks':50},
+   #'wzp6_gaga_mumu_60_ecm365':{'chunks':10},
+   'wzp6_gaga_tautau_60_ecm365':{'chunks':10},
+   #'wzp6_ee_nunuH_ecm365':{'chunks':10}
 }
 
 #Mandatory: Production tag when running over EDM4Hep centrally produced events, this points to the yaml files for getting sample statistics
@@ -18,8 +21,8 @@ prodTag     = "FCCee/winter2023/IDEA/"
 #from userConfig import loc
 #Optional: output directory, default is local dir
 #outputDir="/afs/cern.ch/work/l/lia/private/FCC/NewWorkFlow/FCCeePhysicsPerformance/case-studies/higgs/mH-recoil/ZH_mumu_recoil_batch/stage1/flatNtuples_test"
-#outputDir = "/eos/user/l/lia/FCCee/TopHiggs/mumu/MVAInputs/"
-outputDirEos= "/eos/user/l/lia/FCCee/TopHiggs/mumu/MVAInputs/"
+#outputDir = "test"
+outputDirEos= "/eos/experiment/fcc/ee/analyses_storage/Higgs_and_TOP/mass_xsec/lia/FCCee/TopHiggs/mumu/MVAInputs/"
 eosType = "eosuser"
 #Optional: ncpus, default is 4
 nCPUS       = 4
@@ -33,7 +36,7 @@ batchQueue = "longlunch"
 #Optional computing account when running on HTCondor, default is group_u_FCC.local_gen
 compGroup = "group_u_FCC.local_gen"
 
-userBatchConfig="/afs/cern.ch/work/l/lia/private/FCC/NewWorkFlow/FCCeePhysicsPerformance/case-studies/higgs/mH-recoil/FCCAnalyses-config/TopHiggs/mumu/userBatch.Config"
+#userBatchConfig="/afs/cern.ch/work/l/lia/private/FCC/NewWorkFlow/FCCeePhysicsPerformance/case-studies/higgs/mH-recoil/FCCAnalyses-config/TopHiggs/mumu/userBatch.Config"
 #USER DEFINED CODE
 import ROOT
 ROOT.gInterpreter.Declare("""
@@ -185,11 +188,11 @@ class RDFanalysis():
            
             #Higgsstrahlungness
             .Define("H", "HiggsTools::Higgsstrahlungness(zll_m, zll_recoil_m)")
-            #.Filter("zll_m > 86 && zll_m < 96") 
+            .Filter("zll_m > 86 && zll_m < 96") 
             #.Define("cut3", "3")
-            #.Filter("zll_p > 20 && zll_p <70")
+            .Filter("zll_p > 20")
             #.Define("cut4", "4")
-            #.Filter("zll_recoil_m < 140 && zll_recoil_m > 120")
+            .Filter("zll_recoil_m < 140 && zll_recoil_m > 120")
             #.Define("cut5", "5")
         )
         return df2

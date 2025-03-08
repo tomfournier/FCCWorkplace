@@ -6,9 +6,9 @@ import uproot
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from userConfig import loc, train_vars, mode_names
-import utils as ut
+import tools.utils as ut
 import json
-from config.common_defaults import deffccdicts
+#from config.common_defaults import deffccdicts
 
 def get_data_paths(cur_mode, data_path):
     path = f"{data_path}/{mode_names[cur_mode]}"

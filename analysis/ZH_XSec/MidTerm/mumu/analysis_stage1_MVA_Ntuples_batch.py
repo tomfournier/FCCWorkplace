@@ -14,8 +14,8 @@ prodTag     = "FCCee/winter2023_training/IDEA/"
 
 #from userConfig import loc
 #Optional: output directory, default is local dir
-#outputDir="/afs/cern.ch/work/l/lia/private/FCC/NewWorkFlow/FCCeePhysicsPerformance/case-studies/higgs/mH-recoil/ZH_mumu_recoil_batch/stage1/flatNtuples_test"
-outputDirEos= "/eos/user/l/lia/FCCee/MidTerm/mumu/MVAInputs/"
+#outputDir="test"
+outputDirEos= "/eos/experiment/fcc/ee/analyses_storage/Higgs_and_TOP/mass_xsec/lia/test/mumu/MVAInputs/"
 eosType = "eosuser"
 #Optional: ncpus, default is 4
 nCPUS       = 4
@@ -29,7 +29,7 @@ batchQueue = "longlunch"
 #Optional computing account when running on HTCondor, default is group_u_FCC.local_gen
 compGroup = "group_u_FCC.local_gen"
 
-userBatchConfig="/afs/cern.ch/work/l/lia/private/FCC/NewWorkFlow/FCCeePhysicsPerformance/case-studies/higgs/mH-recoil/FCCAnalyses-config/Winter2023/userBatch.Config"
+#userBatchConfig="/afs/cern.ch/work/l/lia/private/FCC/NewWorkFlow/FCCeePhysicsPerformance/case-studies/higgs/mH-recoil/FCCAnalyses-config/Winter2023/userBatch.Config"
 #USER DEFINED CODE
 import ROOT
 ROOT.gInterpreter.Declare("""
