@@ -1,10 +1,10 @@
 import os
 import importlib
-import utils
+import tools.utils as utils
 
 # Define final_state and ecm
 final_state = "mumu"
-ecm = "365"
+ecm = "240"
 
 # Load userConfig and replace placeholders
 userConfig = importlib.import_module("userConfig")
@@ -12,18 +12,17 @@ userConfig = utils.replace_placeholders(userConfig, final_state, ecm)
 
 # Now you can use userConfig.loc and userConfig.mode_names with the actual values of final_state and ecm
 outputDir = userConfig.loc.TRAIN
-outputDirEos = userConfig.loc.EOS
+# outputDirEos = userConfig.loc.EOS
 
 #Mandatory: List of processes
 processList = {
     f'wzp6_ee_{final_state}H_ecm{ecm}':{'chunks':10},
-    #f"p8_ee_WW_{final_state}_ecm{ecm}":{'chunks':10},
+    f"p8_ee_WW_{final_state}_ecm{ecm}":{'chunks':10},
     f"p8_ee_ZZ_ecm{ecm}":{'chunks':10},
-    #f"wzp6_ee_{final_state}_Mee_30_150_ecm240":{'chunks':10},
     f"wzp6_egamma_eZ_Z{final_state}_ecm{ecm}":{'chunks':10},
     f"wzp6_gammae_eZ_Z{final_state}_ecm{ecm}":{'chunks':10},
-    #f"wzp6_gaga_{final_state}_60_ecm{ecm}":{'chunks':10},
-    #f'wzp6_ee_{final_state}H_ecm{ecm}':{'fraction':0.1},
+    f"wzp6_gaga_{final_state}_60_ecm{ecm}":{'chunks':10},
+    f'wzp6_ee_{final_state}H_ecm{ecm}':{'fraction':0.1},
 }
 
 if final_state == "mumu":
@@ -46,16 +45,17 @@ if not ecm == "365" and final_state == "ee":
     })
 
 #Mandatory: Production tag when running over EDM4Hep centrally produced events, this points to the yaml files for getting sample statistics
-prodTag     = "FCCee/winter2023_training/IDEA/"
+prodTag = "FCCee/winter2023_training/IDEA/"
 
 #Optional: output directory, default is local dir
 eosType = "eosuser"
 #Optional: ncpus, default is 4
-nCPUS       = 10
+nCPUS = 4
 
 #Optional running on HTCondor, default is False
 #runBatch    = True
 runBatch    = False
+
 #Optional batch queue name when running on HTCondor, default is workday
 batchQueue = "longlunch"
 
@@ -87,6 +87,7 @@ bool Selection(ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> in){
     }
 }
 """)
+
 #"sel0_MRecoil_Mll_73_120_pTll_05":"  Z_leptonic_m  > 73 &&  Z_leptonic_m  < 120 &&zed_leptonic_recoil_m.size()==1 && zed_leptonic_recoil_m[0]  > 120 &&zed_leptonic_recoil_m[0]  <140 && Z_leptonic_pt  > 5",
 #Mandatory: RDFanalysis class where the use defines the operations on the TTree
 class RDFanalysis():

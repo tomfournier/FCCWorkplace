@@ -1,6 +1,6 @@
 import os
 import importlib
-import utils
+import tools.utils as utils
 
 # Define final_state and ecm
 final_state = "ee"
@@ -12,7 +12,7 @@ userConfig = utils.replace_placeholders(userConfig, final_state, ecm)
 
 # Now you can use userConfig.loc and userConfig.mode_names with the actual values of final_state and ecm
 outputDir = userConfig.loc.TRAIN
-outputDirEos = userConfig.loc.EOS
+# outputDirEos = userConfig.loc.EOS
 
 #Mandatory: List of processes
 processList = {
