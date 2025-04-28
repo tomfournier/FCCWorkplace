@@ -21,8 +21,8 @@ from sklearn.metrics import accuracy_score
 from sklearn.utils.class_weight import compute_sample_weight
 
 from userConfig import loc, train_vars, mode_names
-import plotting
-import utils as ut
+import tools.plotting
+import tools.utils as ut
 
 rc('font', **{'family': 'serif', 'serif': ['Roman']})
 rc('text', usetex=True)
