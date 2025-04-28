@@ -55,21 +55,21 @@ cutList = {
 ###Dictionary for the ouput variable/hitograms. The key is the name of the variable in the output files. "name" is the name of the variable in the input file, "title" is the x-axis label of the histogram, "bin" the number of bins of the histogram, "xmin" the minimum x-axis value and "xmax" the maximum x-axis value.
 histoList = {
     #plot fundamental varibales:
-    "leading_zll_lepton_p":{"name":"leading_zll_lepton_p","title":"p_{l,leading} [GeV]","bin":[(100,45,85)]},
-    "leading_zll_lepton_theta":{"name":"leading_zll_lepton_theta","title":"#theta_{l,leading}","bins":[(100,0,3.2)]},
-    "subleading_zll_lepton_p":{"name":"subleading_zll_lepton_p","title":"p_{l,subleading}  [GeV]","bins":[(100,20,60)]},
-    "subleading_zll_lepton_theta":{"name":"subleading_zll_lepton_theta","title":"#theta_{l,subleading}","bins":[(100,0,3.2)]},
+    "leading_zll_lepton_p":{"name":"leading_zll_lepton_p","title":"p_{l,leading} [GeV]","bin":100,"xmin":45,"xmax":85},
+    "leading_zll_lepton_theta":{"name":"leading_zll_lepton_theta","title":"#theta_{l,leading}","bin":100,"xmin":0,"xmax":3.2},
+    "subleading_zll_lepton_p":{"name":"subleading_zll_lepton_p","title":"p_{l,subleading}  [GeV]","bin":100,"xmin":20,"xmax":60},
+    "subleading_zll_lepton_theta":{"name":"subleading_zll_lepton_theta","title":"#theta_{l,subleading}","bin":100,"xmin":0,"xmax":3.2},
     #Zed
-    "zll_m":{"name":"zll_m","title":"m_{l^{+}l^{-}} [GeV]","bins":[(100,86,96)]},
-    "zll_p":{"name":"zll_p","title":"p_{l^{+}l^{-}} [GeV]","bins":[(100,20,70)]},
-    "zll_theta":{"name":"zll_theta","title":"#theta_{l^{+}l^{-}}","bins":[(100,0,3.2)]},
+    "zll_m":{"name":"zll_m","title":"m_{l^{+}l^{-}} [GeV]","bin":100,"xmin":86,"xmax":96},
+    "zll_p":{"name":"zll_p","title":"p_{l^{+}l^{-}} [GeV]","bin":100,"xmin":20,"xmax":70},
+    "zll_theta":{"name":"zll_theta","title":"#theta_{l^{+}l^{-}}","bin":100,"xmin":0,"xmax":3.2},
     #more control variables
-    "zll_leptons_acolinearity":{"name":"zll_leptons_acolinearity","title":"#Delta#theta_{l^{+}l^{-}}","bins":[(100,0,3.2)]},
-    "zll_leptons_acoplanarity":{"name":"zll_leptons_acoplanarity","title":"#Delta#phi_{l^{+}l^{-}}","bins":[(100,0,3.2)]},
+    "zll_leptons_acolinearity":{"name":"zll_leptons_acolinearity","title":"#Delta#theta_{l^{+}l^{-}}","bin":100,"xmin":0,"xmax":3.2},
+    "zll_leptons_acoplanarity":{"name":"zll_leptons_acoplanarity","title":"#Delta#phi_{l^{+}l^{-}}","bin":100,"xmin":0,"xmax":3.2},
     #Recoil
-    "zll_recoil_m":{"name":"zll_recoil_m","title":"m_{recoil} [GeV]","bins":[(100,120,140)]},
+    "zll_recoil_m":{"name":"zll_recoil_m","title":"m_{recoil} [GeV]","bin":100,"xmin":120,"xmax":140},
     #missing Information
-    "cosTheta_miss":{"name":"cosTheta_miss","title":"cos#theta_{missing}","bins":[(100,-1,1)]},
+    "cosTheta_miss":{"name":"cosTheta_miss","title":"cos#theta_{missing}","bin":100,"xmin":-1,"xmax":1},
     #Higgsstrahlungness
-    "H":{"name":"H","title":"Higgsstrahlungness","bins":[(110,0,110)]} 
+    "H":{"name":"H","title":"Higgsstrahlungness","bin":110,"xmin":0,"xmax":110} 
 }

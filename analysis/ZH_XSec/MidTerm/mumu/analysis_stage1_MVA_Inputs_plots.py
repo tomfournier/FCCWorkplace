@@ -40,7 +40,6 @@ extralabel = {}
 extralabel["sel_Baseline_no_costhetamiss"] = "Baseline without cos#theta_{miss} cut"
 extralabel["sel_Baseline_costhetamiss"] = "Baseline with cos#theta_{miss} cut"   
 
-
 colors = {}
 colors['mumuH'] = ROOT.kRed
 colors['eeH'] = ROOT.kRed
@@ -53,6 +52,7 @@ colors['gagamumu'] = ROOT.kBlue-8
 colors['gagaee'] = ROOT.kBlue-8
 colors['WW'] = ROOT.kBlue+1
 colors['ZZ'] = ROOT.kGreen+2
+
 plots = {}
 plots['ZH'] = {'signal':{'mumuH':['wzp6_ee_mumuH_ecm240']},
                'backgrounds':{
@@ -64,6 +64,7 @@ plots['ZH'] = {'signal':{'mumuH':['wzp6_ee_mumuH_ecm240']},
                                 'gagamumu':["wzp6_gaga_mumu_60_ecm240"]
                                 }
               }
+
 legend = {}
 legend['mumuH'] = 'Z(#mu^{-}#mu^{+})H'
 legend['eeH'] = 'Z(e^{-}e^{+})H'
