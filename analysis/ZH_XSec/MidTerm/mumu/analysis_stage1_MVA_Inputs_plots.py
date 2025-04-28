@@ -6,11 +6,11 @@ ana_tex        = 'e^{+}e^{-} #rightarrow ZH #rightarrow #mu^{+}#mu^{-} + X'
 delphesVersion = '3.4.2'
 energy         = 240.0
 collider       = 'FCC-ee'
-inputDir       = '/eos/user/l/lia/FCCee/MidTerm/mumu/output/final/'
+inputDir       = '/eos/user/t/tofourni/public/FCC/FCCWorkplace/analysis/ZH_XSec/MidTerm/mumu/output/final/'
 yaxis          = ['lin','log']
-stacksig       = ['stack','nostack']
-formats        = ['pdf','png','eps','tex']
-outdir         = '/eos/user/l/lia/FCCee/MidTerm/mumu/output/plots/'
+stacksig       = ['stack']
+formats        = ['pdf']
+outdir         = '/eos/user/t/tofourni/public/FCC/FCCWorkplace/analysis/ZH_XSec/MidTerm/mumu/output/plots/'
 
 variables = [   #muons
                 "leading_zll_lepton_p",
@@ -33,8 +33,8 @@ variables = [   #muons
                ]
 ###Dictonnary with the analysis name as a key, and the list of selections to be plotted for this analysis. The name of the selections should be the same than in the final selection
 selections = {}
-selections['ZH'] = [ "sel_Baseline_no_costhetamiss", 
-                    "sel_Baseline_costhetamiss"]
+selections['ZH'] = [ "sel_Baseline_no_costhetamiss",] 
+                    # "sel_Baseline_costhetamiss"]
 
 extralabel = {}
 extralabel["sel_Baseline_no_costhetamiss"] = "Baseline without cos#theta_{miss} cut"

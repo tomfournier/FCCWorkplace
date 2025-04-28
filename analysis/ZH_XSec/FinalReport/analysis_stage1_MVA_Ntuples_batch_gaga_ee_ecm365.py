@@ -1,6 +1,6 @@
 import os
 import importlib
-import tools.utils as utils
+import utils
 
 # Define final_state and ecm
 final_state = "ee"

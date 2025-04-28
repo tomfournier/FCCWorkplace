@@ -4,14 +4,14 @@ repo = "/eos/user/t/tofourni/public/FCC/FCCWorkplace/analysis/FinalReport"
 #repo can be changed, but by default writes locally
 class loc : pass
 loc.ROOT = repo+'/'
-loc.OUT = loc.ROOT+'output_trained/'
-loc.DATA = loc.ROOT+'data'
+loc.OUT = loc.ROOT+'output/'
+loc.DATA = loc.OUT+'data'
 loc.CSV = loc.DATA+'/csv'
 loc.PKL = loc.DATA+'/pkl'
 loc.PKL_Val = loc.DATA+'/pkl_val'
 loc.ROOTFILES = loc.DATA+'/ROOT'
-loc.PLOTS = loc.DATA+'/plots'
-#loc.PLOTS = loc.OUT+'plots'
+# loc.PLOTS = loc.DATA+'/plots'
+loc.PLOTS = loc.OUT+'plots'
 loc.PLOTS_Val = loc.OUT+'plots_val'
 loc.TEX = loc.OUT+'tex'
 loc.JSON = loc.OUT+'json'
@@ -20,19 +20,19 @@ loc.JSON = loc.OUT+'json'
 loc.EOS = "/eos/user/t/tofourni/public/FCC/FCCWorkplace/analysis/FinalReport"
 
 #Output BDT model location - used in official sample production to assign MVA weights
-loc.BDT = f"{loc.EOS}/BDT"
+loc.BDT = f"{loc.OUT}/BDT"
 
 #Loaction of prod_04 tuples used in analysis
 loc.PROD = f"{loc.EOS}"
 
 #Samples for first stage BDT training
-loc.TRAIN = f"{loc.PROD}/MVAInputs"
+loc.TRAIN = f"{loc.OUT}/MVAInputs"
 
 #Samples for second stage training
-loc.TRAIN2 = f"{loc.PROD}/Training_4stage2/"
+loc.TRAIN2 = f"{loc.OUT}/Training_4stage2/"
 
 #Samples for final analysis
-loc.ANALYSIS = f"{loc.PROD}/BDT_analysis_samples/"
+loc.ANALYSIS = f"{loc.OUT}/BDT_analysis_samples/"
 
 #First stage BDT including event-level vars
 train_vars = [
@@ -50,6 +50,7 @@ train_vars = [
               #Higgsstrahlungness
               #"H",
               ]
+
 latex_mapping = {
     'leading_zll_lepton_p': r'$p_{\ell_1}$',
     'leading_zll_lepton_theta': r'$\theta_{\ell_1}$',
