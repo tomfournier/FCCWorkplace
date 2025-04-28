@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 from userConfig import loc, train_vars, mode_names
 import tools.utils as ut
 import json
-#from config.common_defaults import deffccdicts
+from config.common_defaults import deffccdicts
 
 def get_data_paths(cur_mode, data_path):
     path = f"{data_path}/{mode_names[cur_mode]}"
@@ -86,7 +86,6 @@ def run(modes, n_folds, stage):
     procDict = update_procDict_keys(proc_dict, mode_names)
 
     xsec = {key: value["crossSection"] for key, value in procDict.items() if key in mode_names}
-
     #print(f"Cross sections = {xsec}")
     
     sig = "mumuH"
@@ -127,7 +126,7 @@ def run(modes, n_folds, stage):
     save_data_to_pickle(dfsum, pkl_path)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Process mumuH, WWmumu, ZZ, Zll,eeZ MC to make reduced files for xgboost training')
+    parser = argparse.ArgumentParser(description='Process mumuH, WWmumu, ZZ, Zll, eeZ MC to make reduced files for xgboost training')
     parser.add_argument("--Mode", action="store", dest="modes", default=["mumuH", "ZZ", "WWmumu", "Zll", "egamma", "gammae", "gaga_mumu"], help="Decay mode")
     parser.add_argument("--Folds", action="store", dest="n_folds", default=2, help="Number of Folds")
     parser.add_argument("--Stage", action="store", dest="stage", default="training", choices=["training", "validation"], help="training or validation")

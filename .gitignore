@@ -80,3 +80,7 @@ build/
 run/
 build/
 out/
+
+# Others #
+###########
+output/

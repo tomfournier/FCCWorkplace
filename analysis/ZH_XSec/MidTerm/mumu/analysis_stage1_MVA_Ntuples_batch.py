@@ -10,19 +10,20 @@ processList = {
 }
 
 #Mandatory: Production tag when running over EDM4Hep centrally produced events, this points to the yaml files for getting sample statistics
-prodTag     = "FCCee/winter2023_training/IDEA/"
+prodTag = "FCCee/winter2023_training/IDEA/"
 
 #from userConfig import loc
 #Optional: output directory, default is local dir
-#outputDir="test"
-outputDirEos= "/eos/experiment/fcc/ee/analyses_storage/Higgs_and_TOP/mass_xsec/lia/test/mumu/MVAInputs/"
+outputDir="/eos/user/t/tofourni/public/FCC/FCCWorkplace/analysis/ZH_XSec/MidTerm/mumu/output/preselection"
+
+# outputDirEos= "/eos/experiment/fcc/ee/analyses_storage/Higgs_and_TOP/mass_xsec/lia/test/mumu/MVAInputs/"
 eosType = "eosuser"
 #Optional: ncpus, default is 4
-nCPUS       = 4
+nCPUS = 4
 
 #Optional running on HTCondor, default is False
-runBatch    = True
-#runBatch    = False
+# runBatch = True
+runBatch = False
 #Optional batch queue name when running on HTCondor, default is workday
 batchQueue = "longlunch"
 
@@ -30,6 +31,7 @@ batchQueue = "longlunch"
 compGroup = "group_u_FCC.local_gen"
 
 #userBatchConfig="/afs/cern.ch/work/l/lia/private/FCC/NewWorkFlow/FCCeePhysicsPerformance/case-studies/higgs/mH-recoil/FCCAnalyses-config/Winter2023/userBatch.Config"
+
 #USER DEFINED CODE
 import ROOT
 ROOT.gInterpreter.Declare("""
@@ -54,6 +56,7 @@ bool Selection(ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> in){
     }
 }
 """)
+
 #"sel0_MRecoil_Mll_73_120_pTll_05":"  Z_leptonic_m  > 73 &&  Z_leptonic_m  < 120 &&zed_leptonic_recoil_m.size()==1 && zed_leptonic_recoil_m[0]  > 120 &&zed_leptonic_recoil_m[0]  <140 && Z_leptonic_pt  > 5",
 #Mandatory: RDFanalysis class where the use defines the operations on the TTree
 class RDFanalysis():
