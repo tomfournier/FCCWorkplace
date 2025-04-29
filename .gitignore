@@ -84,3 +84,5 @@ out/
 # Others #
 ###########
 output/
+data/
+BDT/

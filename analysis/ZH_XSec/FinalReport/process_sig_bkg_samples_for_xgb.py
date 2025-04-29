@@ -6,7 +6,7 @@ import uproot
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from userConfig import loc, train_vars, mode_names
-import utils as ut
+import tools.utils as ut
 import json
 #from config.common_defaults import deffccdicts
 

@@ -1,11 +1,14 @@
-import os
-repo = os.getenv('PWD')+"/analysis/ZH_XSec/MidTerm/mumu"
+import os 
+import numpy as np
+
+repo = os.getenv('PWD')
 # repo = "/eos/user/t/tofourni/public/FCC/FCCWorkplace/analysis/FinalReport"
 #repo can be changed, but by default writes locally
+
 class loc : pass
 loc.ROOT = repo+'/'
 loc.OUT = loc.ROOT+'output/'
-loc.DATA = loc.ROOT+'data'
+loc.DATA = loc.OUT+'data'
 loc.CSV = loc.DATA+'/csv'
 loc.PKL = loc.DATA+'/pkl'
 loc.PKL_Val = loc.DATA+'/pkl_val'
@@ -17,11 +20,11 @@ loc.TEX = loc.OUT+'tex'
 loc.JSON = loc.OUT+'json'
 
 #EOS location for files used in analysis
-loc.EOS = os.path.abspath(".")+"/analysis/ZH_XSec/MidTerm/mumu"
+loc.EOS = os.path.abspath(".")+"/analysis/ZH_XSec/FinalReport"
 # loc.EOS = "/eos/user/t/tofourni/public/FCC/FCCWorkplace/analysis/FinalReport"
 
 #Output BDT model location - used in official sample production to assign MVA weights
-loc.BDT = f"{loc.EOS}/BDT"
+loc.BDT = f"{loc.OUT}/BDT"
 
 #Loaction of prod_04 tuples used in analysis
 loc.PROD = f"{loc.EOS}"
@@ -30,16 +33,13 @@ loc.PROD = f"{loc.EOS}"
 loc.PRESEL = f"{loc.EOS}/output/preselection"
 
 #Samples for first stage BDT training
-loc.TRAIN = f"{loc.PROD}/MVAInputs"
+loc.TRAIN = f"{loc.OUT}/MVAInputs"
 
 #Samples for second stage training
-loc.TRAIN2 = f"{loc.PROD}/Training_4stage2/"
+loc.TRAIN2 = f"{loc.OUT}/Training_4stage2/"
 
 #Samples for final analysis
-loc.ANALYSIS = f"{loc.PROD}/BDT_analysis_samples/"
-
-#Location of plots from BDT evaluation
-loc.PLOTS_BDT = f"{loc.BDT}/plots"
+loc.ANALYSIS = f"{loc.OUT}/BDT_analysis_samples/"
 
 #First stage BDT including event-level vars
 train_vars = [
@@ -57,6 +57,7 @@ train_vars = [
               #Higgsstrahlungness
               #"H",
               ]
+
 latex_mapping = {
     'leading_zll_lepton_p': r'$p_{\ell_1}$',
     'leading_zll_lepton_theta': r'$\theta_{\ell_1}$',

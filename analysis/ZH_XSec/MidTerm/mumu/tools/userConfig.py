@@ -1,33 +1,29 @@
 import os
-repo = os.getenv('PWD')+"/analysis/ZH_XSec/MidTerm/mumu"
-# repo = "/eos/user/t/tofourni/public/FCC/FCCWorkplace/analysis/FinalReport"
+#repo = os.getenv('PWD')
+repo = "/eos/user/t/tofourni/public/FCC/FCCWorkplace/analysis/FinalReport"
 #repo can be changed, but by default writes locally
 class loc : pass
 loc.ROOT = repo+'/'
-loc.OUT = loc.ROOT+'output/'
+loc.OUT = loc.ROOT+'output_trained/'
 loc.DATA = loc.ROOT+'data'
 loc.CSV = loc.DATA+'/csv'
 loc.PKL = loc.DATA+'/pkl'
 loc.PKL_Val = loc.DATA+'/pkl_val'
 loc.ROOTFILES = loc.DATA+'/ROOT'
-# loc.PLOTS = loc.DATA+'/plots'
-loc.PLOTS = loc.OUT+'plots'
+loc.PLOTS = loc.DATA+'/plots'
+#loc.PLOTS = loc.OUT+'plots'
 loc.PLOTS_Val = loc.OUT+'plots_val'
 loc.TEX = loc.OUT+'tex'
 loc.JSON = loc.OUT+'json'
 
 #EOS location for files used in analysis
-loc.EOS = os.path.abspath(".")+"/analysis/ZH_XSec/MidTerm/mumu"
-# loc.EOS = "/eos/user/t/tofourni/public/FCC/FCCWorkplace/analysis/FinalReport"
+loc.EOS = "/eos/user/t/tofourni/public/FCC/FCCWorkplace/analysis/FinalReport"
 
 #Output BDT model location - used in official sample production to assign MVA weights
 loc.BDT = f"{loc.EOS}/BDT"
 
 #Loaction of prod_04 tuples used in analysis
 loc.PROD = f"{loc.EOS}"
-
-#Location of preselection events
-loc.PRESEL = f"{loc.EOS}/output/preselection"
 
 #Samples for first stage BDT training
 loc.TRAIN = f"{loc.PROD}/MVAInputs"
@@ -37,9 +33,6 @@ loc.TRAIN2 = f"{loc.PROD}/Training_4stage2/"
 
 #Samples for final analysis
 loc.ANALYSIS = f"{loc.PROD}/BDT_analysis_samples/"
-
-#Location of plots from BDT evaluation
-loc.PLOTS_BDT = f"{loc.BDT}/plots"
 
 #First stage BDT including event-level vars
 train_vars = [

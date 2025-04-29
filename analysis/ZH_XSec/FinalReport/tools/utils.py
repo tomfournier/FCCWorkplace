@@ -88,8 +88,8 @@ def thres_opt(df, score_column = 'BDTscore', func=Z0, n_spliter=2, score_range=(
 
     for j in range(i):
       xj = score_range[0]+j*wid
-      Sj = len(df_s.query(f'{BDTscore} >= {str(xj)} & {BDTscore} < {str(xi)}').index)
-      Bj = b_scale*len(df_b.query(f'{BDTscore} >= {str(xj)} & {BDTscore} < {str(xi)}').index)
+      Sj = len(df_s.query(f'{score_column} >= {str(xj)} & {score_column} < {str(xi)}').index)
+      Bj = b_scale*len(df_b.query(f'{score_column} >= {str(xj)} & {score_column} < {str(xi)}').index)
       Zj = func(Sj, Bj)
       if Bj<=11: continue
       if Zj<0: continue

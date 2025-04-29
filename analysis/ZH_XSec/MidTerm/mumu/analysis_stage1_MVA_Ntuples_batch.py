@@ -1,12 +1,12 @@
 #Mandatory: List of processes
 processList = {
     'wzp6_ee_mumuH_ecm240':{'chunks':10},
-    'p8_ee_WW_mumu_ecm240':{'chunks':10},
-    'wzp6_egamma_eZ_Zmumu_ecm240':{'chunks':10},
-    'wzp6_gammae_eZ_Zmumu_ecm240':{'chunks':10},
-    'wzp6_ee_mumu_ecm240':{'chunks':10},
-    'p8_ee_ZZ_ecm240':{'chunks':10},
-    "wzp6_gaga_mumu_60_ecm240":{'chunks':10},
+    # 'p8_ee_WW_mumu_ecm240':{'chunks':10},
+    # 'wzp6_egamma_eZ_Zmumu_ecm240':{'chunks':10},
+    # 'wzp6_gammae_eZ_Zmumu_ecm240':{'chunks':10},
+    # 'wzp6_ee_mumu_ecm240':{'chunks':10},
+    # 'p8_ee_ZZ_ecm240':{'chunks':10},
+    # "wzp6_gaga_mumu_60_ecm240":{'chunks':10},
 }
 
 #Mandatory: Production tag when running over EDM4Hep centrally produced events, this points to the yaml files for getting sample statistics

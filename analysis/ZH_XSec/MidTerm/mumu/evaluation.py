@@ -21,8 +21,8 @@ from tqdm import tqdm
 
 from matplotlib import rc
 from userConfig import loc, train_vars, mode_names, latex_mapping, final_states
-import plotting
-import utils as ut
+import tools.plotting
+import tools.utils as ut
 
 rc('font', **{'family': 'serif', 'serif': ['Roman']})
 rc('text', usetex=True)

@@ -8,13 +8,14 @@ from sklearn.model_selection import train_test_split
 from userConfig import loc, train_vars, mode_names
 import tools.utils as ut
 import json
-from config.common_defaults import deffccdicts
+# from config.common_defaults import deffccdicts
 
 def get_data_paths(cur_mode, data_path):
     path = f"{data_path}/{mode_names[cur_mode]}"
-    return glob.glob(f"{path}/*.root")
+    return glob.glob(f"{path}/*")
 
 def calculate_event_counts_and_efficiencies(cur_mode, files, vars_list):
+    print(f"Calculating event counts and efficiencies for {cur_mode}")
     N_events = sum([uproot.open(f)["eventsProcessed"].value for f in files])
     df = pd.concat((ut.get_df(f, vars_list) for f in files), ignore_index=True)
     eff = len(df) / N_events
@@ -58,8 +59,9 @@ def get_procDict(procFile):
         procDict = json.loads(req.decode('utf-8'))
     else:
         if not ('eos' in procFile): 
-            procFile = os.path.join(os.getenv('FCCDICTSDIR', deffccdicts), '') + procFile
-        print(procFile)
+            procFile = os.path.join(os.getenv('FCCDICTSDIR').split(':')[0], '') + procFile 
+            #procFile = os.path.join(os.getenv('FCCDICTSDIR', deffccdicts), '') + procFile
+            print(f"procFile is {procFile}")
         if not os.path.isfile(procFile):
             print ('----> No procDict found: ==={}===, exit'.format(procFile))
             sys.exit(3)
@@ -81,15 +83,15 @@ def update_procDict_keys(procDict, mode_names):
     
 def run(modes, n_folds, stage):
 
-    procFile = "FCCee_procDict_winter2023_training_IDEA.json"
+    procFile = "FCCee_procDict_winter2023_IDEA.json"
     proc_dict = get_procDict(procFile)
     procDict = update_procDict_keys(proc_dict, mode_names)
 
     xsec = {key: value["crossSection"] for key, value in procDict.items() if key in mode_names}
-    #print(f"Cross sections = {xsec}")
+    # print(f"Cross sections = {xsec}")
     
     sig = "mumuH"
-    data_path = loc.TRAIN if stage == "training" else loc.ANALYSIS
+    data_path = loc.PRESEL# if stage == "training" else loc.ANALYSIS
     pkl_path = loc.PKL if stage == "training" else loc.PKL_Val
 
     files = {}

@@ -1,6 +1,5 @@
-import os
 import importlib
-import utils
+# import tools.utils as utils
 
 # Define final_state and ecm
 final_state = "mumu"
@@ -8,21 +7,21 @@ ecm = "240"
 
 # Load userConfig and replace placeholders
 userConfig = importlib.import_module("userConfig")
-userConfig = utils.replace_placeholders(userConfig, final_state, ecm)
+# userConfig = utils.replace_placeholders(userConfig, final_state, ecm)
 
 # Now you can use userConfig.loc and userConfig.mode_names with the actual values of final_state and ecm
-outputDir = userConfig.loc.TRAIN
+outputDir = userConfig.loc.PRESEL
 # outputDirEos = userConfig.loc.EOS
 
 #Mandatory: List of processes
 processList = {
     f'wzp6_ee_{final_state}H_ecm{ecm}':{'chunks':10},
-    f"p8_ee_WW_{final_state}_ecm{ecm}":{'chunks':10},
-    f"p8_ee_ZZ_ecm{ecm}":{'chunks':10},
-    f"wzp6_egamma_eZ_Z{final_state}_ecm{ecm}":{'chunks':10},
-    f"wzp6_gammae_eZ_Z{final_state}_ecm{ecm}":{'chunks':10},
-    f"wzp6_gaga_{final_state}_60_ecm{ecm}":{'chunks':10},
-    f'wzp6_ee_{final_state}H_ecm{ecm}':{'fraction':0.1},
+    # f"p8_ee_WW_{final_state}_ecm{ecm}":{'chunks':10},
+    # f"p8_ee_ZZ_ecm{ecm}":{'chunks':10},
+    # f"wzp6_egamma_eZ_Z{final_state}_ecm{ecm}":{'chunks':10},
+    # f"wzp6_gammae_eZ_Z{final_state}_ecm{ecm}":{'chunks':10},
+    # f"wzp6_gaga_{final_state}_60_ecm{ecm}":{'chunks':10},
+    # f'wzp6_ee_{final_state}H_ecm{ecm}':{'fraction':0.1]},
 }
 
 if final_state == "mumu":
@@ -53,8 +52,8 @@ eosType = "eosuser"
 nCPUS = 4
 
 #Optional running on HTCondor, default is False
-#runBatch    = True
-runBatch    = False
+#runBatch = True
+runBatch = False
 
 #Optional batch queue name when running on HTCondor, default is workday
 batchQueue = "longlunch"
@@ -233,7 +232,7 @@ class RDFanalysis():
             "cosTheta_miss",
             #Higgsstrahlungness
             "H",
-            ##Cutflow
+            #Cutflow
             #"cut0",
             #"cut1",
             #"cut2",

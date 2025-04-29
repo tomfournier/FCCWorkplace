@@ -1,7 +1,10 @@
-import os
-#repo = os.getenv('PWD')
-repo = "/eos/user/t/tofourni/public/FCC/FCCWorkplace/analysis/FinalReport"
+import os 
+import numpy as np
+
+repo = os.getenv('PWD')
+# repo = "/eos/user/t/tofourni/public/FCC/FCCWorkplace/analysis/FinalReport"
 #repo can be changed, but by default writes locally
+
 class loc : pass
 loc.ROOT = repo+'/'
 loc.OUT = loc.ROOT+'output/'
@@ -17,7 +20,8 @@ loc.TEX = loc.OUT+'tex'
 loc.JSON = loc.OUT+'json'
 
 #EOS location for files used in analysis
-loc.EOS = "/eos/user/t/tofourni/public/FCC/FCCWorkplace/analysis/FinalReport"
+loc.EOS = os.path.abspath(".")+"/analysis/ZH_XSec/FinalReport"
+# loc.EOS = "/eos/user/t/tofourni/public/FCC/FCCWorkplace/analysis/FinalReport"
 
 #Output BDT model location - used in official sample production to assign MVA weights
 loc.BDT = f"{loc.OUT}/BDT"
